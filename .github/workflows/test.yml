@@ -1,14 +1,16 @@
 name: Test
 on:
-  push:
-    branches:
-      - main
   pull_request:
+    types:
+      - opened
+      - edited
+      - synchronize
+      - reopened
 jobs:
   test-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./
         id: test
         continue-on-error: true
@@ -42,7 +44,7 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./
         continue-on-error: true
         id: test
@@ -76,7 +78,7 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: ./
         continue-on-error: true
         id: test
